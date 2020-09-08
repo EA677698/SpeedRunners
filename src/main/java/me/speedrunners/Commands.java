@@ -21,8 +21,18 @@ public class Commands implements CommandExecutor {
             if(command.getName().equalsIgnoreCase("speedrun")){
                 if(args.length>0){
                     if(args[0].equalsIgnoreCase("create")){
-                        speedRunner.logic.organizer = (Player) sender;
-                        sender.sendMessage(speedRunner.prefix+ ChatColor.LIGHT_PURPLE+"How many players would you like per team?");
+                        if(!speedRunner.getSetup().phaseThree) {
+                            speedRunner.getSetup().organizer = (Player) sender;
+                            sender.sendMessage(speedRunner.getPrefix() + ChatColor.LIGHT_PURPLE + "How many players would you like per team?");
+                        } else {
+                            sender.sendMessage(speedRunner.getPrefix()+ChatColor.RED+"A game has already been made!");
+                        }
+                    } else if(args[0].equalsIgnoreCase("start")){
+                        if(speedRunner.getSetup().phaseOne&&speedRunner.getSetup().phaseTwo&&speedRunner.getSetup().phaseThree){
+                            if(sender.getName() == speedRunner.getSetup().getOrganizer().getName()){
+
+                            }
+                        }
                     }
                 }
             }
