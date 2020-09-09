@@ -28,9 +28,16 @@ public class Commands implements CommandExecutor {
                             sender.sendMessage(speedRunner.getPrefix()+ChatColor.RED+"A game has already been made!");
                         }
                     } else if(args[0].equalsIgnoreCase("start")){
-                        if(speedRunner.getSetup().phaseOne&&speedRunner.getSetup().phaseTwo&&speedRunner.getSetup().phaseThree){
+                        if(speedRunner.getSetup().phaseThree){
                             if(sender.getName() == speedRunner.getSetup().getOrganizer().getName()){
-
+                                speedRunner.setRun(new TeamStats(speedRunner, speedRunner.getSetup().teamOne,speedRunner.getSetup().getTeamTwo()));
+                            }
+                        }
+                    } else if(args[0].equalsIgnoreCase("stop")){
+                        if(speedRunner.getSetup().phaseThree){
+                            if(sender.getName()==speedRunner.getSetup().getOrganizer().getName()){
+                                speedRunner.getRun().setStop(true);
+                                speedRunner.setRun(null);
                             }
                         }
                     }

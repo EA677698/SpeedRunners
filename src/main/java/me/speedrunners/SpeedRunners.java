@@ -1,5 +1,6 @@
 package me.speedrunners;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -9,6 +10,7 @@ public final class SpeedRunners extends JavaPlugin {
     private Setup setup;
     private String prefix;
     private FileConfiguration config;
+    private TeamStats run;
 
     @Override
     public void onEnable() {
@@ -16,6 +18,8 @@ public final class SpeedRunners extends JavaPlugin {
         setup = new Setup(this);
         saveDefaultConfig();
         config = getConfig();
+        prefix = ChatColor.translateAlternateColorCodes('&',config.getString("prefix"));
+        prefix = prefix+" ";
     }
 
     @Override
@@ -38,5 +42,13 @@ public final class SpeedRunners extends JavaPlugin {
     @Override
     public FileConfiguration getConfig() {
         return config;
+    }
+
+    public TeamStats getRun() {
+        return run;
+    }
+
+    public void setRun(TeamStats run) {
+        this.run = run;
     }
 }
