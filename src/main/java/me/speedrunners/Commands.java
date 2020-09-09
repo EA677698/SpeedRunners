@@ -12,7 +12,6 @@ public class Commands implements CommandExecutor {
 
     public Commands(SpeedRunners speedRunner){
         this.speedRunner = speedRunner;
-        speedRunner.getCommand("speedrunners").setExecutor(this);
     }
 
     @Override
@@ -30,7 +29,7 @@ public class Commands implements CommandExecutor {
                     } else if(args[0].equalsIgnoreCase("start")){
                         if(speedRunner.getSetup().phaseThree){
                             if(sender.getName() == speedRunner.getSetup().getOrganizer().getName()){
-                                speedRunner.setRun(new TeamStats(speedRunner, speedRunner.getSetup().teamOne,speedRunner.getSetup().getTeamTwo()));
+                                speedRunner.setRun(new TeamStats(speedRunner, speedRunner.getSetup().getTeamOne(),speedRunner.getSetup().getTeamTwo()));
                             }
                         }
                     } else if(args[0].equalsIgnoreCase("stop")){

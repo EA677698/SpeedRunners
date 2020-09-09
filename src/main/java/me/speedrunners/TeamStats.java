@@ -17,7 +17,7 @@ public class TeamStats {
     private SpeedRunners speedRunner;
     private ScoreboardManager manager;
     private Scoreboard board;
-    private Objective display, time;
+    private Objective time;
     private Team teamOne,teamTwo;
     private boolean stop;
     private LocalTime startTime;
@@ -34,9 +34,7 @@ public class TeamStats {
         teamTwo.setDisplayName("Team Two");
         teamOne.setColor(ChatColor.AQUA);
         teamTwo.setColor(ChatColor.GREEN);
-        display = board.registerNewObjective("Timer","dummy","Time:");
-        display.setDisplaySlot(DisplaySlot.SIDEBAR);
-        time = board.registerNewObjective("Time", "dummy","");
+        time = board.registerNewObjective("Timer", "dummy","placeholder");
         time.setDisplaySlot(DisplaySlot.SIDEBAR);
         for(Player player : teamOneMembers){
             teamOne.addEntry(player.getName());
@@ -50,12 +48,12 @@ public class TeamStats {
         timer();
     }
 
-    public void timer(){
+    private void timer(){
         new BukkitRunnable(){
             @Override
             public void run() {
                 if(!stop){
-                    time.setDisplayName(timeSinceStart());
+                    time.setDisplayName("Time: "+timeSinceStart());
                     for(Player player : teamOneMembers){
                         AdvancementProgress progress = player.getAdvancementProgress(Bukkit.getAdvancement(new NamespacedKey(speedRunner, "story/upgrade_tools")));
                         if(progress.isDone()){
@@ -84,7 +82,7 @@ public class TeamStats {
     }
 
     public String timeSinceStart(){
-        Duration duration = Duration.between(LocalDateTime.now()
+        Duration duration = Duration.between(LocalTime.now()
                 , startTime);
         long seconds = duration.getSeconds();
         long absSeconds = Math.abs(seconds);

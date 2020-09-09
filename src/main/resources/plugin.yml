@@ -5,6 +5,6 @@ api-version: 1.16
 authors: [ Erick ]
 description: A plugin for tracking times, split times, and making teams
 commands:
-  speedrunners:
+  speedrun:
     description: main command
     aliases: sr

@@ -15,10 +15,14 @@ public final class SpeedRunners extends JavaPlugin {
     @Override
     public void onEnable() {
         commands = new Commands(this);
+        getCommand("speedrun").setExecutor(commands);
         setup = new Setup(this);
+        getServer().getPluginManager().registerEvents(setup,this);
         saveDefaultConfig();
         config = getConfig();
-        prefix = ChatColor.translateAlternateColorCodes('&',config.getString("prefix"));
+        reloadConfig();
+        //prefix = ChatColor.translateAlternateColorCodes('&',config.getString("prefix"));
+        prefix = "["+ChatColor.AQUA+"SpeedRunners"+ChatColor.WHITE+"]";
         prefix = prefix+" ";
     }
 
